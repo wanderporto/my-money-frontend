@@ -9,11 +9,12 @@ import TabsHeader from '../common/tab/tabsheader'
 import TabsContent from '../common/tab/tabscontent'
 import TabHeader from '../common/tab/tabheader'
 import TabContent from '../common/tab/tabcontent'
-import { selectTab } from '../common/tab/tabactions'
+import { selectTab, showTabs } from '../common/tab/tabactions'
 
 class BillingCycle extends Component {
     componentWillMount() {
         this.props.selectTab('tablist')
+        this.props.showTabs('tablist', 'tabcreate')
     }
     render() {
         return (
@@ -21,7 +22,7 @@ class BillingCycle extends Component {
                 <ContentHeader title='Ciclos de Pagamentos' small='Cadastro' />
                 <Content>
                     <Tabs>
-                        <TabsHeader>/
+                        <TabsHeader>
                             <TabHeader label='Listar' icon='bars' target='tablist' />
                             <TabHeader label='Incluir' icon='plus' target='tabcreate' />
                             <TabHeader label='Alterar' icon='pencil' target='tabupdate' />
@@ -40,5 +41,5 @@ class BillingCycle extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({ selectTab }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ selectTab, showTabs }, dispatch)
 export default connect(null, mapDispatchToProps)(BillingCycle)
