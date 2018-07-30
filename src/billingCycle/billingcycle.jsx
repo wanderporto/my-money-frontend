@@ -34,7 +34,7 @@ class BillingCycle extends Component {
                         <TabsContent>
                             <TabContent id='tablist'><List /></TabContent>
                             <TabContent id='tabcreate'> <Form onSubmit={this.props.create} /> </TabContent>
-                            <TabContent id='tabupdate'><h1>Alterar</h1> </TabContent>
+                            <TabContent id='tabupdate'><Form /></TabContent>
                             <TabContent id='tabdelete'><h1>Deletar</h1> </TabContent>
                         </TabsContent>
                     </Tabs>
