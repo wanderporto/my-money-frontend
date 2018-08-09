@@ -7,7 +7,7 @@ import billingcycle from './billingcycle';
 const BASE_URL = 'http://localhost:3003/api'
 
 const INITIAL_VALUES = {
-
+    credits : [{}]
 }
 
 export function getList() {
