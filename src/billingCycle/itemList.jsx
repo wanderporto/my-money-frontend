@@ -5,18 +5,17 @@ import { connect } from 'react-redux'
 
 import Grid from '../common/layout/grid'
 import Input from '../common/form/input'
+import If from '../common/operator/if'
 
 class ItemList extends Component {
     add(index, item = {}) {
-        console.log('wander')
-        console.log(this.props.readOnly)
         if (!this.props.readOnly) {
-            this.props.arrayInsert('BillingCycleForm', 'credits', index, item)
+            this.props.arrayInsert('BillingCycleForm', this.props.field, index, item)
         }
     }
     remove(index) {
         if (!this.props.readOnly && this.props.list.length > 1) {
-            this.props.arrayRemove('BillingCycleForm', 'credits', index)
+            this.props.arrayRemove('BillingCycleForm', this.props.field, index)
         }
     }
     renderRows() {
@@ -24,15 +23,22 @@ class ItemList extends Component {
         return list.map((item, index) => (
             <tr key={index}>
                 <td><Field
-                    name={`credits[${index}].name`}
+                    name={`${this.props.field}[${index}].name`}
                     component={Input}
                     placeholder='Informe o nome'
                     readOnly={this.props.readOnly} /></td>
                 <td><Field
-                    name={`credits[${index}].value`}
+                    name={`${this.props.field}[${index}].value`}
                     component={Input}
                     placeholder='Informe o valor'
                     readOnly={this.props.readOnly} /></td>
+                <If test={this.props.showStatus}>
+                    <td><Field
+                        name={`${this.props.field}[${index}].status`}
+                        component={Input}
+                        placeholder='Informe o status'
+                        readOnly={this.props.readOnly} /></td>
+                </If>
                 <td>
                     <button type='button' className='btn btn-success' onClick={() => this.add(index + 1)}>
                         <i className='fa fa-plus'></i>
@@ -52,12 +58,15 @@ class ItemList extends Component {
         return (
             <Grid cols={this.props.cols}>
                 <fieldset>
-                    <legend>Créditos</legend>
+                    <legend>{this.props.legend}</legend>
                     <table className='table'>
                         <thead>
                             <tr>
                                 <th>Nome</th>
                                 <th>Valor</th>
+                                <If test={this.props.showStatus}>
+                                    <th>Status</th>
+                                </If>
                                 <th className='table-actions'>Ações</th>
                             </tr>
                         </thead>
